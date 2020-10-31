@@ -2,8 +2,8 @@ name: Scala Container
 
 on:
     push:
-        paths:
-            - scala/**/*
+        # paths:
+        #     - scala/**/*
 
         # Publish `main` as Docker `latest` image.
         branches:
@@ -19,6 +19,7 @@ on:
 env:
     IMAGE_NAME: scala
     DOCKERFILE: scala/base.Dockerfile
+    REGISTRY: ghcr.io
 
 jobs:
     # Push image to GitHub Packages.
@@ -34,11 +35,11 @@ jobs:
               run: docker build - <${DOCKERFILE} --tag $IMAGE_NAME
 
             - name: Log into GitHub Container Registry
-              run: echo "${{ secrets.CR_PAT }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
+              run: echo "${{ secrets.CR_PAT }}" | docker login https://${REGISTRY} -u ${{ github.actor }} --password-stdin
 
             - name: Push image to GitHub Container Registry
               run: |
-                  IMAGE_ID=ghcr.io/${{ github.repository }}/$IMAGE_NAME
+                  IMAGE_ID=${REGISTRY}/${{ github.repository }}/$IMAGE_NAME
 
                   # Change all uppercase to lowercase
                   IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
@@ -57,3 +58,12 @@ jobs:
 
                   docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
                   docker push $IMAGE_ID:$VERSION
+
+            - run: mkdir -p path/to/artifact
+
+            - run: echo hello > path/to/artifact/world.txt
+
+            - uses: actions/upload-artifact@v2
+              with:
+                  name: my-artifact
+                  path: path/to/artifact/world.txt

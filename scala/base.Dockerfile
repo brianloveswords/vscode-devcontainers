@@ -24,7 +24,6 @@ RUN curl -Lo cs https://git.io/coursier-cli-linux \
 
 ENV PATH $PATH:/root/.local/share/coursier/bin
 
-# Force download of sbt
 RUN cd /tmp && sbt version && rm -rf target project
 
 # [Optional] Uncomment this section to install additional OS packages.
