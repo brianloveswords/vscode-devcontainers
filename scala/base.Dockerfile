@@ -5,6 +5,7 @@ FROM mcr.microsoft.com/vscode/devcontainers/java:${JAVA_VARIANT}
 # [Option] Install Maven
 ARG INSTALL_MAVEN="false"
 ARG MAVEN_VERSION=""
+
 # [Option] Install Gradle
 ARG INSTALL_GRADLE="false"
 ARG GRADLE_VERSION=""

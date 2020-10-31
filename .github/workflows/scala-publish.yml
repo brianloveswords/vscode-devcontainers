@@ -3,7 +3,7 @@ name: Scala Container
 on:
     push:
         paths:
-            - scala/*
+            - scala/**/*
 
         # Publish `main` as Docker `latest` image.
         branches:
@@ -17,28 +17,13 @@ on:
     pull_request:
 
 env:
-    # TODO: Change variable to your image's name.
     IMAGE_NAME: vscode-devcontainer-scala
     DOCKERFILE: scala/base.Dockerfile
 
 jobs:
-    # Run tests.
-    # See also https://docs.docker.com/docker-hub/builds/automated-testing/
-    # test:
-    #     runs-on: ubuntu-latest
-
-    #     steps:
-    #         - uses: actions/checkout@v2
-
-    #         - name: Run tests
-    #           run: docker build - <${DOCKERFILE}
-
     # Push image to GitHub Packages.
     # See also https://docs.docker.com/docker-hub/builds/
     push:
-        # Ensure test job passes before pushing image.
-        # needs: test
-
         runs-on: ubuntu-latest
         if: github.event_name == 'push'
 
