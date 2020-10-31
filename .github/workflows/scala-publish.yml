@@ -17,7 +17,7 @@ on:
     pull_request:
 
 env:
-    IMAGE_NAME: vscode-devcontainer-scala
+    IMAGE_NAME: scala
     DOCKERFILE: scala/base.Dockerfile
 
 jobs:
@@ -38,7 +38,7 @@ jobs:
 
             - name: Push image to GitHub Container Registry
               run: |
-                  IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
+                  IMAGE_ID=ghcr.io/${{ github.repository }}/$IMAGE_NAME
 
                   # Change all uppercase to lowercase
                   IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')

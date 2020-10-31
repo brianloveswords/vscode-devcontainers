@@ -1,4 +1,4 @@
-FROM ghcr.io/brianloveswords/vscode-devcontainer-scala:latest
+FROM ghcr.io/brianloveswords/vscode-devcontainers/scala:latest
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
