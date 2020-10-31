@@ -4,16 +4,23 @@ A VSCode [devcontainer](https://code.visualstudio.com/docs/remote/containers) fo
 
 ## Usage
 
+```bash
+mkdir new-scala-project && cd "$_"
+curl -sSL https://raw.githubusercontent.com/brianloveswords/vscode-devcontainers/main/scala/bootstrap.sh | sh
+code .
+```
+
 ## You May Not Want to Use This, Unless You Are Me
 
-I'm new to Scala and JVM in general, and Docker isn't my dancehall either, so
-while this is working for me, it's probably trash, who knows (I certainly
-don't). I'm mostly putting this up here so I don't have to keep rebuilding it
-from scratch.
+I'm new to Scala and that JVM life in general, also I don't really live and
+breath containers either, so while this is working for me it's probably trash,
+who knows (I certainly don't). I'm mostly putting this up here so I don't have
+to keep rebuilding it from scratch.
 
 If this _mostly_ works for you, but you need a few tweaks, please feel free to
 fork and make those changes! But if you think those changes would make my life
-better as well, please also feel free to submit PRs with them.
+better as well, please submit those PRs back to me so I can learn to not be
+trash.
 
 ## License
 

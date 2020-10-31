@@ -2,6 +2,8 @@
 ARG JAVA_VARIANT=15
 FROM mcr.microsoft.com/vscode/devcontainers/java:${JAVA_VARIANT}
 
+LABEL org.opencontainers.image.source https://github.com/brianloveswords/vscode-devcontainers
+
 # [Option] Install Maven
 ARG INSTALL_MAVEN="false"
 ARG MAVEN_VERSION=""
