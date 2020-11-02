@@ -4,6 +4,8 @@ FROM mcr.microsoft.com/vscode/devcontainers/java:${JAVA_VARIANT}
 
 LABEL org.opencontainers.image.source https://github.com/brianloveswords/vscode-devcontainers
 
+ARG MILL_VERSION="0.8.0"
+
 # [Option] Install Maven
 ARG INSTALL_MAVEN="false"
 ARG MAVEN_VERSION=""
@@ -24,9 +26,24 @@ RUN curl -Lo cs https://git.io/coursier-cli-linux \
     && ./cs setup -y \
     && rm cs
 
+RUN curl -sSL https://github.com/lihaoyi/mill/releases/download/${MILL_VERSION}/${MILL_VERSION} >/usr/local/bin/mill \
+    && chmod +x /usr/local/bin/mill \
+    && cd /tmp && mill --version
+
 ENV PATH $PATH:/root/.local/share/coursier/bin
 
 RUN cd /tmp && sbt version && rm -rf target project
+
+## Notes for installing graal
+# RUN curl -sSLO https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.2.0/graalvm-ce-java11-linux-amd64-20.2.0.tar.gz
+# RUN tar -C /usr/local -xvzf graalvm-ce-java11-linux-amd64-20.2.0.tar.gz
+# RUN rm graalvm-ce-java11-linux-amd64-20.2.0.tar.gz
+# ENV PATH /usr/local/graalvm-ce-java11-20.2.0/bin:${PATH}
+# ENV OPENJDK_JAVA_HOME /usr/local/openjdk-15
+# ENV GRAALVM_JAVA_HOME /usr/local/graalvm-ce-java11-20.2.0
+# RUN gu install native-image
+# RUN apt-get -y install --no-install-recommends build-essential libz-dev zlib1g-dev
+
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
